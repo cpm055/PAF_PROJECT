@@ -60,7 +60,7 @@ public class CommentController {
             @AuthenticationPrincipal UserDetails currentUser,
             @PathVariable String commentId) {
 
-        System.out.println("Deleting comment: " + commentId);
+        System.out.println("Deleting comment: " + commentId); //Delete comment
         System.out.println("By user: " + currentUser.getUsername());
 
         commentService.deleteComment(currentUser.getUsername(), commentId);
