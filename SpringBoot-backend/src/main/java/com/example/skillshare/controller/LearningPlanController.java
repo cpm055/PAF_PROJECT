@@ -98,17 +98,7 @@ public class LearningPlanController {
         return ResponseEntity.ok(learningPlan);
     }
 
-    @PutMapping("/{planId}/steps/{stepId}")
-    public ResponseEntity<LearningPlan> updateLearningStep(
-            @AuthenticationPrincipal UserDetails currentUser,
-            @PathVariable String planId,
-            @PathVariable String stepId,
-            @RequestBody LearningStep step) {
-
-        LearningPlan learningPlan = learningPlanService.updateLearningStep(currentUser.getUsername(), planId, stepId,
-                step);
-        return ResponseEntity.ok(learningPlan);
-    }
+    
 
     @DeleteMapping("/{planId}/steps/{stepId}")
     public ResponseEntity<LearningPlan> deleteLearningStep(
