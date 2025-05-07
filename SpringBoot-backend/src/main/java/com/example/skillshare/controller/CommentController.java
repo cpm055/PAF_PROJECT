@@ -41,7 +41,7 @@ public class CommentController {
 
         System.out.println("Updating comment: " + commentId); // update comment
         System.out.println("By user: " + currentUser.getUsername()); //Get username
-        System.out.println("New content: " + commentDto.getContent());
+        System.out.println("New content: " + commentDto.getContent()); //Get content
 
         Comment comment = commentService.updateComment(currentUser.getUsername(), commentId, commentDto);
 
