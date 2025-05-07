@@ -67,7 +67,28 @@ public class PostController {
 
 
 
+    @PostMapping("/{postId}/comments")
+    public ResponseEntity<Comment> addComment(
+            @AuthenticationPrincipal UserDetails currentUser,
+            @PathVariable String postId,
+            @RequestBody CommentDto commentDto) {
 
+        System.out.println("Adding comment to post: " + postId);
+        System.out.println("By user: " + currentUser.getUsername());
+        System.out.println("Comment content: " + commentDto.getContent());
+
+        Comment comment = commentService.addComment(currentUser.getUsername(), postId, commentDto);
+
+        // Enrich with user data
+        User user = userRepository.findByEmail(currentUser.getUsername()).orElse(null);
+        if (user != null) {
+            comment.setUserName(user.getName());
+            comment.setUsername(user.getUsername());
+            comment.setUserProfilePicture(user.getProfilePicture());
+        }
+
+        return ResponseEntity.ok(comment);
+    }
 
     // Helper methods to enrich posts with user data
     private void enrichPostsWithUserData(Page<Post> posts) {
