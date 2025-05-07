@@ -34,7 +34,8 @@ public class CommentController {
 
         return ResponseEntity.ok(comment);
     }
-
+    
+    //Update part
     @PutMapping("/{commentId}")
     public ResponseEntity<Comment> updateComment(
             @AuthenticationPrincipal UserDetails currentUser,
