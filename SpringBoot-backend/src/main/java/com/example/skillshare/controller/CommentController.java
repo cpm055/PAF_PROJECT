@@ -39,7 +39,7 @@ public class CommentController {
             @PathVariable String commentId,
             @RequestBody CommentDto commentDto) {
 
-        System.out.println("Updating comment: " + commentId);
+        System.out.println("Updating comment: " + commentId); // update comment
         System.out.println("By user: " + currentUser.getUsername());
         System.out.println("New content: " + commentDto.getContent());
 
