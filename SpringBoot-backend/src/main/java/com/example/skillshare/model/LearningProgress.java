@@ -128,39 +128,9 @@ public class LearningProgress {
         return completionDate;
     }
 
-    public void setCompletionDate(Date completionDate) {
-        this.completionDate = completionDate;
-    }
 
-    public Date getCreatedAt() {
-        return createdAt;
-    }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
 
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
 
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getUserProfilePicture() {
-        return userProfilePicture;
-    }
-
-    public void setUserProfilePicture(String userProfilePicture) {
-        this.userProfilePicture = userProfilePicture;
-    }
 }
