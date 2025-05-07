@@ -61,7 +61,7 @@ public class CommentController {
             @PathVariable String commentId) {
 
         System.out.println("Deleting comment: " + commentId); //Delete comment
-        System.out.println("By user: " + currentUser.getUsername());
+        System.out.println("By user: " + currentUser.getUsername()); //Username
 
         commentService.deleteComment(currentUser.getUsername(), commentId);
         return ResponseEntity.ok().build();
