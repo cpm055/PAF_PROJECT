@@ -11,6 +11,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+//comment controller part
 @RestController
 @RequestMapping("/api/comments")
 @RequiredArgsConstructor
@@ -18,7 +19,8 @@ public class CommentController {
 
     private final CommentService commentService;
     private final UserRepository userRepository;
-
+    
+    //create part 
     @GetMapping("/{commentId}")
     public ResponseEntity<Comment> getCommentById(@PathVariable String commentId) {
         Comment comment = commentService.getCommentById(commentId);
@@ -32,16 +34,17 @@ public class CommentController {
 
         return ResponseEntity.ok(comment);
     }
-
+    
+    //Update part
     @PutMapping("/{commentId}")
     public ResponseEntity<Comment> updateComment(
             @AuthenticationPrincipal UserDetails currentUser,
             @PathVariable String commentId,
             @RequestBody CommentDto commentDto) {
 
-        System.out.println("Updating comment: " + commentId);
-        System.out.println("By user: " + currentUser.getUsername());
-        System.out.println("New content: " + commentDto.getContent());
+        System.out.println("Updating comment: " + commentId); // update comment
+        System.out.println("By user: " + currentUser.getUsername()); //Get username
+        System.out.println("New content: " + commentDto.getContent()); //Get content
 
         Comment comment = commentService.updateComment(currentUser.getUsername(), commentId, commentDto);
 
@@ -54,14 +57,14 @@ public class CommentController {
 
         return ResponseEntity.ok(comment);
     }
-
+    //delete part
     @DeleteMapping("/{commentId}")
     public ResponseEntity<?> deleteComment(
             @AuthenticationPrincipal UserDetails currentUser,
             @PathVariable String commentId) {
 
-        System.out.println("Deleting comment: " + commentId);
-        System.out.println("By user: " + currentUser.getUsername());
+        System.out.println("Deleting comment: " + commentId); //Delete comment
+        System.out.println("By user: " + currentUser.getUsername()); //Username
 
         commentService.deleteComment(currentUser.getUsername(), commentId);
         return ResponseEntity.ok().build();
