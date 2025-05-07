@@ -56,7 +56,17 @@ public class LearningPlanController {
         return ResponseEntity.ok(learningPlan);
     }
 
-    
+    @PutMapping("/{planId}")
+    public ResponseEntity<LearningPlan> updateLearningPlan(
+            @AuthenticationPrincipal UserDetails currentUser,
+            @PathVariable String planId,
+            @RequestBody LearningPlanDto learningPlanDto) {
+
+        LearningPlan learningPlan = learningPlanService.updateLearningPlan(currentUser.getUsername(), planId,
+                learningPlanDto);
+        return ResponseEntity.ok(learningPlan);
+    }
+
     @DeleteMapping("/{planId}")
     public ResponseEntity<?> deleteLearningPlan(
             @AuthenticationPrincipal UserDetails currentUser,
@@ -110,6 +120,7 @@ public class LearningPlanController {
         return ResponseEntity.ok(learningPlan);
     }
 
+//mapping
     @PutMapping("/{planId}/steps/{stepId}/reorder")
     public ResponseEntity<LearningPlan> reorderLearningStep(
             @AuthenticationPrincipal UserDetails currentUser,
