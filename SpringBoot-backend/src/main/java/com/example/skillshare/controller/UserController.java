@@ -87,7 +87,22 @@ public class UserController {
         return ResponseEntity.ok(updatedUser);
     }
 
-  
+    // Only the profile picture and cover photo methods need updates:
+
+    @PostMapping("/profile/picture")
+    public ResponseEntity<?> updateProfilePicture(
+            @AuthenticationPrincipal UserDetails currentUser,
+            @RequestParam("profilePicture") MultipartFile file) {
+
+        String email = currentUser.getUsername();
+        String imageUrl = fileStorageService.storeFile(file);
+        User updatedUser = userService.updateProfilePicture(email, imageUrl);
+
+        // Return the full user object with updated profile picture
+        Map<String, Object> response = new HashMap<>();
+        response.put("data", updatedUser);
+        return ResponseEntity.ok(response);
+    }
 
     @PostMapping("/profile/cover")
     public ResponseEntity<?> updateCoverPicture(
