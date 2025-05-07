@@ -34,7 +34,16 @@ public class PostController {
     private final FileStorageService fileStorageService;
     private final UserRepository userRepository;
 
+    @GetMapping
+    public ResponseEntity<Page<Post>> getAllPosts(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
 
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Post> posts = postService.getAllPosts(pageable);
+        enrichPostsWithUserData(posts);
+        return ResponseEntity.ok(posts);
+    }
 
     @GetMapping("/feed")
     public ResponseEntity<Page<Post>> getFeedPosts(
