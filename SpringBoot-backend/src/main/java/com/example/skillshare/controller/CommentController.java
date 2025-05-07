@@ -34,7 +34,27 @@ public class CommentController {
         return ResponseEntity.ok(comment);
     }
 
+    @PutMapping("/{commentId}")
+    public ResponseEntity<Comment> updateComment(
+            @AuthenticationPrincipal UserDetails currentUser,
+            @PathVariable String commentId,
+            @RequestBody CommentDto commentDto) {
 
+        System.out.println("Updating comment: " + commentId);
+        System.out.println("By user: " + currentUser.getUsername());
+        System.out.println("New content: " + commentDto.getContent());
+
+        Comment comment = commentService.updateComment(currentUser.getUsername(), commentId, commentDto);
+
+        // Enrich with user data
+        User user = userRepository.findById(comment.getUserId()).orElse(null);
+        if (user != null) {
+            comment.setUserName(user.getName());
+            comment.setUserProfilePicture(user.getProfilePicture());
+        }
+
+        return ResponseEntity.ok(comment);
+    }
 
     @DeleteMapping("/{commentId}")
     public ResponseEntity<?> deleteComment(
