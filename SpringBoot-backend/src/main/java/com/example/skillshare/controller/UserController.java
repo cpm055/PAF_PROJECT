@@ -119,21 +119,7 @@ public class UserController {
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/{userId}/follow")
-    public ResponseEntity<?> followUser(
-            @AuthenticationPrincipal UserDetails currentUser,
-            @PathVariable String userId) {
-
-        String email = currentUser.getUsername();
-        User currentUserEntity = userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("Current user not found"));
-
-        // Prevent users from following themselves
-        if (currentUserEntity.getId().equals(userId)) {
-            Map<String, String> errorResponse = new HashMap<>();
-            errorResponse.put("error", "Users cannot follow themselves");
-            return ResponseEntity.badRequest().body(errorResponse);
-        }
+    
 
         userService.followUser(email, userId);
 
