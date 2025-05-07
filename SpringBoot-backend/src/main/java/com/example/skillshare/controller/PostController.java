@@ -65,7 +65,33 @@ public class PostController {
 
 
 
+    @GetMapping("/{postId}/comments")
+    public ResponseEntity<Map<String, Object>> getPostComments(
+            @PathVariable String postId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
 
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Comment> comments = commentService.getCommentsByPostId(postId, pageable);
+
+        // Enrich comments with user data
+        for (Comment comment : comments.getContent()) {
+            User user = userRepository.findById(comment.getUserId()).orElse(null);
+            if (user != null) {
+                comment.setUserName(user.getName());
+                comment.setUsername(user.getUsername());
+                comment.setUserProfilePicture(user.getProfilePicture());
+            }
+        }
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("content", comments.getContent());
+        response.put("totalElements", comments.getTotalElements());
+        response.put("totalPages", comments.getTotalPages());
+        response.put("currentPage", comments.getNumber());
+
+        return ResponseEntity.ok(response);
+    }
 
     @PostMapping("/{postId}/comments")
     public ResponseEntity<Comment> addComment(
