@@ -36,15 +36,5 @@ public class CommentController {
 
 
 
-    @DeleteMapping("/{commentId}")
-    public ResponseEntity<?> deleteComment(
-            @AuthenticationPrincipal UserDetails currentUser,
-            @PathVariable String commentId) {
 
-        System.out.println("Deleting comment: " + commentId);
-        System.out.println("By user: " + currentUser.getUsername());
-
-        commentService.deleteComment(currentUser.getUsername(), commentId);
-        return ResponseEntity.ok().build();
-    }
 }
