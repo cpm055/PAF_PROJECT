@@ -36,12 +36,57 @@ public class PostController {
 
 
 
+    @GetMapping("/feed")
+    public ResponseEntity<Page<Post>> getFeedPosts(
+            @AuthenticationPrincipal UserDetails currentUser,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
 
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Post> posts = postService.getFeedPosts(currentUser.getUsername(), pageable);
+        enrichPostsWithUserData(posts);
+        return ResponseEntity.ok(posts);
+    }
 
+    @GetMapping("/{postId}")
+    public ResponseEntity<Post> getPostById(@PathVariable String postId) {
+        Post post = postService.getPostById(postId);
+        enrichPostWithUserData(post);
+        return ResponseEntity.ok(post);
+    }
 
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<Page<Post>> getPostsByUserId(
+            @PathVariable String userId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
 
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Post> posts = postService.getPostsByUserId(userId, pageable);
+        enrichPostsWithUserData(posts);
+        return ResponseEntity.ok(posts);
+    }
 
+    @PostMapping
+    public ResponseEntity<Post> createPost(
+            @AuthenticationPrincipal UserDetails currentUser,
+            @RequestParam("content") String content,
+            @RequestParam(value = "skillCategory", required = false) String skillCategory,
+            @RequestParam(value = "files", required = false) MultipartFile[] files) {
 
+        System.out.println("Received create post request from: " + currentUser.getUsername());
+        System.out.println("Content: " + content);
+        System.out.println("Skill Category: " + skillCategory);
+
+        List<String> mediaUrls = new ArrayList<>();
+
+        if (files != null) {
+            System.out.println("Files count: " + files.length);
+            for (MultipartFile file : files) {
+                String fileUrl = fileStorageService.storeFile(file);
+                mediaUrls.add(fileUrl);
+            }
+        }
 
         PostDto postDto = new PostDto();
         postDto.setContent(content);
