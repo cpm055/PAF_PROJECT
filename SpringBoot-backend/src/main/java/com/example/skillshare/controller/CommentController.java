@@ -57,7 +57,8 @@ public class CommentController {
 
         return ResponseEntity.ok(comment);
     }
-
+    
+    //Delete part
     @DeleteMapping("/{commentId}")
     public ResponseEntity<?> deleteComment(
             @AuthenticationPrincipal UserDetails currentUser,
