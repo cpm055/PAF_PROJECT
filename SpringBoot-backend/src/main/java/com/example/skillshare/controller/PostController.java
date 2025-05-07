@@ -63,7 +63,23 @@ public class PostController {
 
  
 
+    @PostMapping("/{postId}/like")
+    public ResponseEntity<?> likePost(
+            @AuthenticationPrincipal UserDetails currentUser,
+            @PathVariable String postId) {
 
+        postService.likePost(currentUser.getUsername(), postId);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/{postId}/unlike")
+    public ResponseEntity<?> unlikePost(
+            @AuthenticationPrincipal UserDetails currentUser,
+            @PathVariable String postId) {
+
+        postService.unlikePost(currentUser.getUsername(), postId);
+        return ResponseEntity.ok().build();
+    }
 
     @GetMapping("/{postId}/comments")
     public ResponseEntity<Map<String, Object>> getPostComments(
