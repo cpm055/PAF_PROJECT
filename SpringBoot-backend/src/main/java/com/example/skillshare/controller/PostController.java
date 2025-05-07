@@ -61,7 +61,14 @@ public class PostController {
         return ResponseEntity.ok(post);
     }
 
- 
+    @DeleteMapping("/{postId}")
+    public ResponseEntity<?> deletePost(
+            @AuthenticationPrincipal UserDetails currentUser,
+            @PathVariable String postId) {
+
+        postService.deletePost(currentUser.getUsername(), postId);
+        return ResponseEntity.ok().build();
+    }
 
     @PostMapping("/{postId}/like")
     public ResponseEntity<?> likePost(
