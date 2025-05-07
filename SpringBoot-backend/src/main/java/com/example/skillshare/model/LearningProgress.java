@@ -144,7 +144,17 @@ public class LearningProgress {
         return updatedAt;
     }
 
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
 
 }
