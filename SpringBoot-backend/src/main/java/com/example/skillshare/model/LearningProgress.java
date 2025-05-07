@@ -128,7 +128,21 @@ public class LearningProgress {
         return completionDate;
     }
 
+    public void setCompletionDate(Date completionDate) {
+        this.completionDate = completionDate;
+    }
 
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
 
 
 
