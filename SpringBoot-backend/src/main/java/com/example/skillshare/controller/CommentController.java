@@ -19,7 +19,8 @@ public class CommentController {
 
     private final CommentService commentService;
     private final UserRepository userRepository;
-
+    
+    //create part 
     @GetMapping("/{commentId}")
     public ResponseEntity<Comment> getCommentById(@PathVariable String commentId) {
         Comment comment = commentService.getCommentById(commentId);
