@@ -9,7 +9,13 @@ import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import ProfilePage from './pages/ProfilePage';
-//cvzvxc
+import EditProfilePage from './pages/EditProfilePage';
+import ExplorePage from './pages/ExploreSkillsPage';
+import PostPage from './pages/PostPage';
+import LearningPlanPage from './pages/LearningPlanPage';
+import CreateLearningPlanPage from './pages/CreateLearningPlanPage';
+import SavedPostsPage from './pages/SavedPostsPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 // Components
 import Layout from './components/Layout';
