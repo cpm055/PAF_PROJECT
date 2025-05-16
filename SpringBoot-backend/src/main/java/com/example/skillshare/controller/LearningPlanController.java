@@ -120,7 +120,6 @@ public class LearningPlanController {
         return ResponseEntity.ok(learningPlan);
     }
 
-//mapping
     @PutMapping("/{planId}/steps/{stepId}/reorder")
     public ResponseEntity<LearningPlan> reorderLearningStep(
             @AuthenticationPrincipal UserDetails currentUser,
