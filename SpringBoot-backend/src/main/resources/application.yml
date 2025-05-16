@@ -4,7 +4,7 @@ server:
 spring:
   data:
     mongodb:
-      uri: mongodb+srv://chathruwanpahansith055:NdIbO840JXSZkqsw@paf.kelbuhn.mongodb.net/Pafproject?retryWrites=true&w=majority&appName=paf
+      uri: mongodb+srv://aweeshainfo:rTS7SoEfhFhXtGkk@skill-share-paf.rdmrwm0.mongodb.net/pafProject?retryWrites=true&w=majority&appName=skill-share-paf
   servlet:
     multipart:
       max-file-size: 10MB
