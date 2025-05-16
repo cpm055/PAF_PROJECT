@@ -178,7 +178,6 @@ public class UserController {
         response.put("data", userData);
         return ResponseEntity.ok(response);
     }
-    //hkhk
 
     @GetMapping("/{userId}/followers")
     public ResponseEntity<?> getUserFollowers(
