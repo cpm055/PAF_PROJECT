@@ -4,7 +4,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import ProtectedRoute from './components/ProtectedRoute';
 
-// Pages
+// Pages import
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
